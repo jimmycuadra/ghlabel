@@ -37,15 +37,17 @@ pub struct Client<'a> {
     repo: &'a str,
     token: &'a str,
     user: &'a str,
+    endpoint: &'a str,
 }
 
 impl<'a> Client<'a> {
-    pub fn new(repo: &'a str, token: &'a str, user: &'a str) -> Client<'a> {
+    pub fn new(repo: &'a str, token: &'a str, user: &'a str, endpoint: &'a str) -> Client<'a> {
         Client {
             client: HyperClient::new(),
             repo: repo,
             token: token,
             user: user,
+            endpoint: endpoint,
         }
     }
 
@@ -54,7 +56,7 @@ impl<'a> Client<'a> {
 
         let mut response = try!(
             self.client.post(
-                &format!("https://api.github.com/repos/{}/{}/labels", self.user, self.repo)
+                &format!("{}/repos/{}/{}/labels", self.endpoint, self.user, self.repo)
             ).headers(self.headers()).body(&data).send()
         );
 
@@ -86,7 +88,7 @@ impl<'a> Client<'a> {
     pub fn list<'b>(&self) -> Result<Vec<Label>, Error> {
         let mut response =  try!(
             self.client.get(
-                &format!("https://api.github.com/repos/{}/{}/labels", self.user, self.repo)
+                &format!("{}/repos/{}/{}/labels", self.endpoint, self.user, self.repo)
             ).headers(self.headers()).send()
         );
 

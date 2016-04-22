@@ -89,6 +89,15 @@ private repo. Otherwise, it only requires the \"public_repo\" scope.
                 .empty_values(false)
          )
         .arg(
+          Arg::with_name("endpoint")
+                .help("API endpoint to use (defaults to https://api.github.com)")
+                .long("endpoint")
+                .short("e")
+                .takes_value(true)
+                .required(false)
+                .empty_values(false)
+        )
+        .arg(
             Arg::with_name("dry-run")
                 .help("Print what the program would do without actually doing it")
                 .long("dry-run")
@@ -110,6 +119,7 @@ private repo. Otherwise, it only requires the \"public_repo\" scope.
     let token = matches.value_of("token").unwrap();
     let user = matches.value_of("user").unwrap();
     let repo = matches.value_of("repo").unwrap();
+    let endpoint = matches.value_of("endpoint").unwrap_or("https://api.github.com");
 
     let dry_run = matches.is_present("dry-run");
     let should_create = !matches.is_present("no-create");
@@ -152,7 +162,7 @@ private repo. Otherwise, it only requires the \"public_repo\" scope.
        }
     };
 
-    let client = Client::new(&repo, &token, &user);
+    let client = Client::new(&repo, &token, &user, &endpoint);
 
     let existing_labels = match client.list() {
         Ok(existing_labels) => {

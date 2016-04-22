@@ -24,10 +24,11 @@ FLAGS:
   -v, --version      Prints version information
 
 OPTIONS:
-  -f, --file <file>      Path to a YAML file containing the label template
-  -r, --repo <repo>      The name of the repository to apply the label template to
-  -t, --token <token>    OAuth token for authenticating with GitHub
-  -u, --user <user>      The name of the user or organization that owns the repository
+  -e, --endpoint <endpoint>    API endpoint to use (defaults to https://api.github.com)
+  -f, --file <file>            Path to a YAML file containing the label template
+  -r, --repo <repo>            The name of the repository to apply the label template to
+  -t, --token <token>          OAuth token for authenticating with GitHub
+  -u, --user <user>            The name of the user or organization that owns the repository
 ```
 
 Example:
