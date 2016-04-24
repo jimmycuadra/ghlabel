@@ -4,7 +4,7 @@ use url::{ParseError, Url};
 pub struct Label {
     pub color: String,
     pub name: String,
-    pub url: Url,
+    pub url: String,
 }
 
 impl PartialEq<Label> for Label {
@@ -31,19 +31,20 @@ pub type Result = ::std::result::Result<Label, Error>;
 
 impl Label {
     pub fn new<'a>(
+        endpoint: &'a str,
         name: &'a str,
         color: &'a str,
         user: &'a str,
         repo: &'a str
     ) -> Result {
         let url = try!(
-            Url::parse(&format!("https://api.github.com/repos/{}/{}/labels/{}", user, repo, name))
+            Url::parse(&format!("{}/repos/{}/{}/labels/{}", endpoint, user, repo, name))
         );
 
         Ok(Label {
             color: color.to_string(),
             name: name.to_string(),
-            url: url,
+            url: url.to_string(),
         })
     }
 }

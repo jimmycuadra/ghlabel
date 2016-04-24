@@ -154,7 +154,7 @@ private repo. Otherwise, it only requires the \"public_repo\" scope.
        }
     };
 
-    let labels = match get_labels(&template, user, repo) {
+    let labels = match get_labels(&template, endpoint, user, repo) {
        Ok(labels) => labels,
        Err(_) => {
            println!("Invalid label! Each label must be a hash with the keys `name` and `color`");
@@ -229,6 +229,7 @@ fn read_file<'a>(path: &'a str) -> Result<String, IoError> {
 
 fn get_labels<'a>(
     template: &'a Vec<Yaml>,
+    endpoint: &'a str,
     user: &'a str,
     repo: &'a str,
 ) -> Result<Vec<Label>, LabelError> {
@@ -236,7 +237,7 @@ fn get_labels<'a>(
 
     for item in template.iter() {
        let (name, color) = try!(get_name_and_color(item));
-       let label = try!(Label::new(name, color, user, repo));
+       let label = try!(Label::new(endpoint, name, color, user, repo));
        labels.push(label);
     }
 

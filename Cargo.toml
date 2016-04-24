@@ -1,19 +1,18 @@
 [package]
-name = "ghlabel"
-version = "0.1.0"
 authors = ["Jimmy Cuadra <jimmy@jimmycuadra.com>"]
 description = "Automatically creates and deletes labels on GitHub Issues to match a template."
-license = "MIT"
-readme = "README.md"
-keywords = ["github", "github issues", "pull requests", "labels"]
-repository = "https://github.com/jimmycuadra/ghlabel"
-homepage = "https://github.com/jimmycuadra/ghlabel"
 documentation = "http://jimmycuadra.github.io/ghlabel/ghlabel"
+homepage = "https://github.com/jimmycuadra/ghlabel"
+keywords = ["github", "github issues", "pull requests", "labels"]
+license = "MIT"
+name = "ghlabel"
+readme = "README.md"
+repository = "https://github.com/jimmycuadra/ghlabel"
+version = "0.1.0"
 
 [dependencies]
-
-"clap" = "^1.4.0"
-"hyper" = "^0.6.13"
-"rustc-serialize" = "^0.3.16"
-"url" = "^0.2.37"
-"yaml-rust" = "^0.2.1"
+clap = "2.3.0"
+hyper = "0.9.1"
+rustc-serialize = "0.3.19"
+url = "1.0.0"
+yaml-rust = "0.3.2"
